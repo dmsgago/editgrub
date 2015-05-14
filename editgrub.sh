@@ -16,3 +16,20 @@ echo -e "1. Cambiar la imagen de fondo del grub.\n2. Cambiar el tiempo de espera
 
 # Pide al usuario que elija una de las opciones del menú
 read -p "-- Elige una de las opciones del menú [1-3]: " opcion
+
+# Filtra la opción elegida y realiza la operación
+case $opcion
+in
+"1")
+	# Operación de la opción uno
+;;
+"2")
+	# Operación de la opción dos
+;;
+"3")
+	# Operación de la opción tres
+;;
+"*")
+	# Opción no válida
+;;
+esac
