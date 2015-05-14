@@ -21,7 +21,8 @@ read -p "-- Elige una de las opciones del menú [1-3]: " opcion
 case $opcion
 in
 "1")
-	# Operación de la opción uno
+	# Solicita al usuario la ruta de la imagen
+	read -p "\nIntroduce la ruta de la imagen: " rutaimagen
 ;;
 "2")
 	# Operación de la opción dos
