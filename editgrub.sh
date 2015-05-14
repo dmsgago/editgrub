@@ -22,7 +22,16 @@ case $opcion
 in
 "1")
 	# Solicita al usuario la ruta de la imagen
-	read -p "\nIntroduce la ruta de la imagen: " rutaimagen
+	read -p "\nIntroduce la ruta de la imagen: [.png]" rutaimagen
+
+	# Comprueba que existe la imagen enviada por el usuario
+	if [ -e $rutaimagen ]
+		then
+		# Operaciones
+		echo "Operaciones."
+	else
+		echo "El fichero $rutaimagen no existe."
+	fi
 ;;
 "2")
 	# Operación de la opción dos
