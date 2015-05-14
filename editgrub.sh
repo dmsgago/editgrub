@@ -27,8 +27,13 @@ in
 	# Comprueba que existe la imagen enviada por el usuario
 	if [ -e $rutaimagen ]
 		then
-		# Operaciones
-		echo "Operaciones."
+		if [ -f $rutaimagen ]
+			then
+			# Operaciones
+			echo "Operaciones."
+		else
+			echo "$rutaimagen es un directorio."
+		fi
 	else
 		echo "El fichero $rutaimagen no existe."
 	fi
