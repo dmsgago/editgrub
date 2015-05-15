@@ -24,7 +24,8 @@ case $opcion
 in
 "1")
 	# Solicita al usuario la ruta de la imagen
-	read -p "\nIntroduce la ruta de la imagen: [.png]" rutaimagen
+	echo ""
+	read -p "Introduce la ruta de la imagen [.png]: " rutaimagen
 
 	# Comprueba que existe la imagen enviada por el usuario
 	if [ -e $rutaimagen ]
@@ -32,11 +33,11 @@ in
 	    if [ -f $rutaimagen ]
 	    then
 		# Comprueba si el fichero es una imagen .png
-		extension = {rutaimagen##*.}
-		if [ extension = "png" ]
+		extension=$(echo ${rutaimagen##*.})
+		if [ $extension = "png" ]
 		then
 		    # Comprueba si hay alguna imagen de fondo ya establecida
-		    background = $(grep GRUB_BACKGROUND /etc/default/grub)
+		    background=$(grep GRUB_BACKGROUND /etc/default/grub)
 		    if [ -z $background ]
 		    then
 			echo -e "GRUB_BACKGROUND=\"$rutaimagen\"" >> /etc/default/grub
