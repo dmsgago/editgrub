@@ -103,7 +103,8 @@ in
 	# Comprueba si el valor de la variable "seleccion" es un número
 	if [[ $seleccion =~ $expresion ]]
 	then
-	    echo "operaciones"
+	    # Cuenta el número de entradas en el grub
+	    numentrada=$(wc -l < /var/tmp/entradas.txt)
 	else
 	    echo "La entrada seleccionada no es un número entero: $seleccion"
 	fi
