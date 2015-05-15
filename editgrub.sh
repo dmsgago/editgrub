@@ -76,12 +76,12 @@ in
 	read -p "Introduce el tiempo de espera en segundos: " time
 	# Comprueba que el tiempo introducido por el usuario es un número
 	# Expresión regular utilizada
-	expresion = "^[0-9]+$"
+	expresion="^[0-9]+$"
 	if [[ $time =~ $expresion ]]
 	then
-	    echo "Operaciones"
+	    sed -i"~" '/GRUB_TIMEOUT/ cGRUB_TIMEOUT=$time' /etc/default/grub
 	else
-	    echo "Tiempo introducido erróneo: $time"
+	    echo "Tiempo introducido no es un número entero: $time"
 	fi
 ;;
 "3")
