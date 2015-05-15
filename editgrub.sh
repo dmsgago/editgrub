@@ -41,10 +41,12 @@ in
 		    if [ -z $background ]
 		    then
 			echo -e "GRUB_BACKGROUND=\"$rutaimagen\"" >> /etc/default/grub
+			echo "Imagen insertada."
 		    else
                         # Elimina la antigua imagen, creando una copia de respaldo del fichero /etc/default/grub
 			sed -i"~" '/GRUB_BACKGROUND/d' /etc/default/grub
 			echo -e "GRUB_BACKGROUND=\"$rutaimagen\"" >> /etc/default/grub
+			echo "Imagen insertada."
 		    fi
 		else
 		    echo "El fichero $rutaimagen debe ser un fichero: .png"
