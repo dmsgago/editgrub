@@ -80,6 +80,7 @@ in
 	if [[ $time =~ $expresion ]]
 	then
 	    sed -i"~" '/GRUB_TIMEOUT/ cGRUB_TIMEOUT=$time' /etc/default/grub
+	    update-grub
 	else
 	    echo "Tiempo introducido no es un número entero: $time"
 	fi
