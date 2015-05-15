@@ -40,13 +40,17 @@ in
 		    background=$(grep GRUB_BACKGROUND /etc/default/grub)
 		    if [ -z $background ]
 		    then
+			convert -resize 640x $rutaimagen $rutaimagen
 			echo -e "GRUB_BACKGROUND=\"$rutaimagen\"" >> /etc/default/grub
 			echo "Imagen insertada."
+			update-grub
 		    else
                         # Elimina la antigua imagen, creando una copia de respaldo del fichero /etc/default/grub
+			convert -resize 640x $rutaimagen $rutaimagen
 			sed -i"~" '/GRUB_BACKGROUND/d' /etc/default/grub
 			echo -e "GRUB_BACKGROUND=\"$rutaimagen\"" >> /etc/default/grub
 			echo "Imagen insertada."
+			update-grub
 		    fi
 		else
 		    echo "El fichero $rutaimagen debe ser un fichero: .png"
