@@ -30,20 +30,20 @@ in
 	# Solicita al usuario la ruta de la imagen
 	echo ""
 	read -p "Introduce la ruta de la imagen [.png]: " -er rutaimagen
-	# Comprueba que existe la imagen enviada por el usuario
+        # Comprueba que existe la imagen enviada por el usuario
 	if [ -e $rutaimagen ]
 	then
 	    if [ -f $rutaimagen ]
 	    then
-		# Comprueba que la ruta sea absoluta
+                # Comprueba que la ruta sea absoluta
 		tiporuta=$(echo ${rutaimagen:0:1})
 		if [ $tiporuta = "/" ]
 		then
                     # Comprueba si el fichero es una imagen .png
 		    extension=$(echo ${rutaimagen##*.})
 		    if [ $extension = "png" ]
-		    then
-		        # Comprueba si hay alguna imagen de fondo ya establecida
+		    then		        
+                        # Comprueba si hay alguna imagen de fondo ya establecida
 			background=$(grep GRUB_BACKGROUND /etc/default/grub)
 			if [ -z $background ]
 			then
@@ -97,6 +97,15 @@ in
 	    echo -e "\t$i. $entrada"
 	    let i=$i+"1"
 	done < /var/tmp/entradas.txt
+	# Solicita al usuario que elija una entrada
+	read -p "-- Elige una entrada del menú: " seleccion
+	# Comprueba si el valor de la variable "seleccion" es un número
+	if [[ $seleccion =~ $expresion ]]
+	then
+	    echo "operaciones"
+	else
+	    echo "La entrada seleccionada no es un número entero: $seleccion"
+	fi
 ;;
 "*")
 	# Opción no válida
