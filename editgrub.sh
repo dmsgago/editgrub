@@ -26,34 +26,42 @@ in
 	# Solicita al usuario la ruta de la imagen
 	echo ""
 	read -p "Introduce la ruta de la imagen [.png]: " -er rutaimagen
-
 	# Comprueba que existe la imagen enviada por el usuario
 	if [ -e $rutaimagen ]
 	then
 	    if [ -f $rutaimagen ]
 	    then
-		# Comprueba si el fichero es una imagen .png
-		extension=$(echo ${rutaimagen##*.})
-		if [ $extension = "png" ]
+		# Comprueba que la ruta sea absoluta
+		tiporuta=$(echo ${var:0:1})
+		if [[ $tiporuta = "/" ]]
 		then
-		    # Comprueba si hay alguna imagen de fondo ya establecida
-		    background=$(grep GRUB_BACKGROUND /etc/default/grub)
-		    if [ -z $background ]
+                    # Comprueba si el fichero es una imagen .png
+		    extension=$(echo ${rutaimagen##*.})
+		    if [ $extension = "png" ]
 		    then
-			convert -resize 640x $rutaimagen $rutaimagen
-			echo -e "GRUB_BACKGROUND=\"$rutaimagen\"" >> /etc/default/grub
-			echo "Imagen insertada."
-			update-grub
+		        # Comprueba si hay alguna imagen de fondo ya establecida
+			background=$(grep GRUB_BACKGROUND /etc/default/grub)
+			if [ -z $background ]
+			then
+			    # Escala la imagen para que tenga el tamaño necesario para que el grub la inserte de fondo
+			    convert -resize 640x $rutaimagen $rutaimagen
+			    echo -e "GRUB_BACKGROUND=\"$rutaimagen\"" >> /etc/default/grub
+			    echo "Imagen insertada."
+			    update-grub
+			else
+                            # Elimina la antigua imagen, creando una copia de respaldo del fichero /etc/default/grub
+			    # Escala la imagen para que tenga el tamaño necesario para que el grub la inserte de fondo
+			    convert -resize 640x $rutaimagen $rutaimagen
+			    sed -i"~" '/GRUB_BACKGROUND/d' /etc/default/grub
+			    echo -e "GRUB_BACKGROUND=\"$rutaimagen\"" >> /etc/default/grub
+			    echo "Imagen insertada."
+			    update-grub
+			fi
 		    else
-                        # Elimina la antigua imagen, creando una copia de respaldo del fichero /etc/default/grub
-			convert -resize 640x $rutaimagen $rutaimagen
-			sed -i"~" '/GRUB_BACKGROUND/d' /etc/default/grub
-			echo -e "GRUB_BACKGROUND=\"$rutaimagen\"" >> /etc/default/grub
-			echo "Imagen insertada."
-			update-grub
+			echo "El fichero $rutaimagen debe ser un fichero: .png"
 		    fi
 		else
-		    echo "El fichero $rutaimagen debe ser un fichero: .png"
+		    echo "La ruta debe ser absoluta: $rutaimagen"
 		fi
 	    else
 		echo "$rutaimagen es un directorio, debe ser un fichero."
