@@ -71,7 +71,9 @@ in
 	fi
 ;;
 "2")
-	# Operación de la opción dos
+        # Solicita al usuario que introduzca el tiempo de espera
+        echo ""
+	read -p "Introduce el tiempo de espera en segundos: " time
 ;;
 "3")
 	# Operación de la opción tres
