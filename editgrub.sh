@@ -74,6 +74,15 @@ in
         # Solicita al usuario que introduzca el tiempo de espera
         echo ""
 	read -p "Introduce el tiempo de espera en segundos: " time
+	# Comprueba que el tiempo introducido por el usuario es un número
+	# Expresión regular utilizada
+	expresion = "^[0-9]+$"
+	if [[ $time =~ $expresion ]]
+	then
+	    echo "Operaciones"
+	else
+	    echo "Tiempo introducido erróneo: $time"
+	fi
 ;;
 "3")
 	# Operación de la opción tres
