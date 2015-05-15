@@ -1,4 +1,6 @@
 #!/bin/bash
+# Script en GNU/LINUX.
+# Diego Martín Sánchez, 1ASIR.- IES Gonzalo Nazareno
 
 # Muestra la cabecera del script
 echo $"
@@ -26,16 +28,23 @@ in
 
 	# Comprueba que existe la imagen enviada por el usuario
 	if [ -e $rutaimagen ]
+	then
+	    if [ -f $rutaimagen ]
+	    then
+		# Comprueba si hay alguna imagen de fondo ya establecida
+		background = $(grep GRUB_BACKGROUND /etc/default/grub)
+		if [ -z $background ]
 		then
-		if [ -f $rutaimagen ]
-			then
-			# Operaciones
-			echo "Operaciones."
+		    echo -e "GRUB_BACKGROUND=\"$rutaimagen\"" >> /etc/default/grub
 		else
-			echo "$rutaimagen es un directorio."
-		fi
+		    # Elimina la antigua imagen, creando una copia de respaldo del fichero /etc/default/grub
+		    sed -i"~" '/GRUB_BACKGROUND/d' /etc/default/grub
+		    echo -e "GRUB_BACKGROUND=\"$rutaimagen\"" >> /etc/default/grub
+	    else
+		echo "$rutaimagen es un directorio, debe ser un fichero."
+	    fi
 	else
-		echo "El fichero $rutaimagen no existe."
+	    echo "El fichero $rutaimagen no existe."
 	fi
 ;;
 "2")
