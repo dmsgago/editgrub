@@ -92,6 +92,7 @@ in
 	grep -e menuentry /boot/grub/grub.cfg | grep -oe "'.*'" > /var/tmp/entradas.txt
 	# Muestra las entradas al usuario
 	i="1"
+	# Lee cada línea del fichero /var/tmp/entradas.txt
 	while read entrada
 	do
 	    echo -e "\t$i. $entrada"
