@@ -31,15 +31,23 @@ in
 	then
 	    if [ -f $rutaimagen ]
 	    then
-		# Comprueba si hay alguna imagen de fondo ya establecida
-		background = $(grep GRUB_BACKGROUND /etc/default/grub)
-		if [ -z $background ]
+		# Comprueba si el fichero es una imagen .png
+		extension = {rutaimagen##*.}
+		if [ extension = "png" ]
 		then
-		    echo -e "GRUB_BACKGROUND=\"$rutaimagen\"" >> /etc/default/grub
+		    # Comprueba si hay alguna imagen de fondo ya establecida
+		    background = $(grep GRUB_BACKGROUND /etc/default/grub)
+		    if [ -z $background ]
+		    then
+			echo -e "GRUB_BACKGROUND=\"$rutaimagen\"" >> /etc/default/grub
+		    else
+                        # Elimina la antigua imagen, creando una copia de respaldo del fichero /etc/default/grub
+			sed -i"~" '/GRUB_BACKGROUND/d' /etc/default/grub
+			echo -e "GRUB_BACKGROUND=\"$rutaimagen\"" >> /etc/default/grub
+		    fi
 		else
-		    # Elimina la antigua imagen, creando una copia de respaldo del fichero /etc/default/grub
-		    sed -i"~" '/GRUB_BACKGROUND/d' /etc/default/grub
-		    echo -e "GRUB_BACKGROUND=\"$rutaimagen\"" >> /etc/default/grub
+		    echo "El fichero $rutaimagen debe ser un fichero: .png"
+		fi
 	    else
 		echo "$rutaimagen es un directorio, debe ser un fichero."
 	    fi
