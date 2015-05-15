@@ -88,13 +88,13 @@ in
 ;;
 "3")
 	# Guarda las entradas actuales en un fichero
-	echo ""
+	echo -e "\n--Entradas en el grub:"
 	grep -e menuentry /boot/grub/grub.cfg | grep -oe "'.*'" > /var/tmp/entradas.txt
 	# Muestra las entradas al usuario
 	i="1"
 	while read entrada
 	do
-	    echo -e "$i. $entrada"
+	    echo -e "\t$i. $entrada"
 	    let i=$i+"1"
 	done < /var/tmp/entradas.txt
 ;;
