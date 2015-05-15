@@ -13,6 +13,10 @@ echo $"
                                                       
 "
 
+# Declaración de variable
+# Expresión regular utilizada
+expresion="^[0-9]+$"
+
 # Muestra el menú principal
 echo -e "1. Cambiar la imagen de fondo del grub.\n2. Cambiar el tiempo de espera inicial.\n3. Cambiar la entrada marcada por defecto.\n"
 
@@ -50,7 +54,6 @@ in
 			    update-grub
 			else
                             # Elimina la antigua imagen, creando una copia de respaldo del fichero /etc/default/grub
-			    # Escala la imagen para que tenga el tamaño necesario para que el grub la inserte de fondo
 			    convert -resize 640x $rutaimagen $rutaimagen
 			    sed -i"~" '/GRUB_BACKGROUND/d' /etc/default/grub
 			    echo -e "GRUB_BACKGROUND=\"$rutaimagen\"" >> /etc/default/grub
@@ -75,8 +78,6 @@ in
         echo ""
 	read -p "Introduce el tiempo de espera en segundos: " time
 	# Comprueba que el tiempo introducido por el usuario es un número
-	# Expresión regular utilizada
-	expresion="^[0-9]+$"
 	if [[ $time =~ $expresion ]]
 	then
 	    sed -i"~" '/GRUB_TIMEOUT/ cGRUB_TIMEOUT=$time' /etc/default/grub
@@ -86,7 +87,10 @@ in
 	fi
 ;;
 "3")
-	# Operación de la opción tres
+	# Guarda las entradas actuales en un fichero
+	grep -e menuentry /boot/grub/grub.cfg | grep -oe "'.*'" > /var/tmp/entradas.txt
+	# Muestra las entradas al usuario
+	
 ;;
 "*")
 	# Opción no válida
