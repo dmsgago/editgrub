@@ -25,7 +25,7 @@ in
 "1")
 	# Solicita al usuario la ruta de la imagen
 	echo ""
-	read -p "Introduce la ruta de la imagen [.png]: " rutaimagen
+	read -p "Introduce la ruta de la imagen [.png]: " -er rutaimagen
 
 	# Comprueba que existe la imagen enviada por el usuario
 	if [ -e $rutaimagen ]
