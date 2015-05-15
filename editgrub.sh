@@ -99,12 +99,20 @@ in
 	    let i=$i+"1"
 	done < /var/tmp/entradas.txt
 	# Solicita al usuario que elija una entrada
+	echo ""
 	read -p "-- Elige una entrada del menú: " seleccion
 	# Comprueba si el valor de la variable "seleccion" es un número
 	if [[ $seleccion =~ $expresion ]]
 	then
 	    # Cuenta el número de entradas en el grub
-	    numentrada=$(wc -l < /var/tmp/entradas.txt)
+	    numentradas=$(wc -l < /var/tmp/entradas.txt)
+	    # Comprueba que la entrada seleccionada no sea mayor al numero de entradas disponibles
+	    if [[ $seleccion -le $numentradas ]]
+	    then
+		echo "Operaciones"
+	    else
+		echo "Entrada no disponible"
+	    fi
 	else
 	    echo "La entrada seleccionada no es un número entero: $seleccion"
 	fi
