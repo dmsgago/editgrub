@@ -32,8 +32,8 @@ in
 	    if [ -f $rutaimagen ]
 	    then
 		# Comprueba que la ruta sea absoluta
-		tiporuta=$(echo ${var:0:1})
-		if [[ $tiporuta = "/" ]]
+		tiporuta=$(echo ${rutaimagen:0:1})
+		if [ $tiporuta = "/" ]
 		then
                     # Comprueba si el fichero es una imagen .png
 		    extension=$(echo ${rutaimagen##*.})
