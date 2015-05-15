@@ -80,7 +80,7 @@ in
 	# Comprueba que el tiempo introducido por el usuario es un número
 	if [[ $time =~ $expresion ]]
 	then
-	    sed -i"~" '/GRUB_TIMEOUT/ cGRUB_TIMEOUT=$time' /etc/default/grub
+	    sed -i"~" '/GRUB_TIMEOUT/ cGRUB_TIMEOUT='"$time" /etc/default/grub
 	    update-grub
 	else
 	    echo "Tiempo introducido no es un número entero: $time"
@@ -109,7 +109,8 @@ in
 	    # Comprueba que la entrada seleccionada no sea mayor al numero de entradas disponibles
 	    if [[ $seleccion -le $numentradas ]]
 	    then
-		echo "Operaciones"
+		sed -i"~" '/GRUB_DEFAULT/ cGRUB_DEFAULT='"$seleccion" /etc/default/grub
+		update-grub
 	    else
 		echo "Entrada no disponible"
 	    fi
