@@ -121,6 +121,7 @@ do
 	        # Comprueba que la entrada seleccionada no sea mayor al numero de entradas disponibles
 		if [[ $seleccion -le $numentradas ]]
 		then
+		    let seleccion=$seleccion-"1"
 		    sed -i"~" '/GRUB_DEFAULT/ cGRUB_DEFAULT='"$seleccion" /etc/default/grub
 		    update-grub
 		    read -p "Pulsa INTRO para continuar..."
