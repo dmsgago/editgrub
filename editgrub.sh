@@ -136,8 +136,9 @@ do
 	"4")
 	    salir="1"
 	    ;;
-	"*")
-	    # Opción no válida
+	*)
+	    echo "Operación no permitida."
+	    read -p "Pulsa INTRO para continuar..."
 	    ;;
     esac
 done
