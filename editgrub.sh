@@ -56,6 +56,7 @@ do
 				echo -e "GRUB_BACKGROUND=\"$rutaimagen\"" >> /etc/default/grub
 				echo "Imagen insertada."
 				update-grub
+				read -p "Pulsa INTRO para continuar..."
 			    else
                                 # Elimina la antigua imagen, creando una copia de respaldo del fichero /etc/default/grub
 				convert -resize 640x $rutaimagen $rutaimagen
@@ -63,6 +64,7 @@ do
 				echo -e "GRUB_BACKGROUND=\"$rutaimagen\"" >> /etc/default/grub
 				echo "Imagen insertada."
 				update-grub
+				read -p "Pulsa INTRO para continuar..."
 			    fi
 			else
 			    echo "El fichero $rutaimagen debe ser un fichero: .png"
@@ -90,6 +92,7 @@ do
 	    then
 		sed -i"~" '/GRUB_TIMEOUT/ cGRUB_TIMEOUT='"$time" /etc/default/grub
 		update-grub
+		read -p "Pulsa INTRO para continuar..."
 	    else
 		echo "Tiempo introducido no es un número entero: $time"
 		read -p "Pulsa INTRO para continuar..."
@@ -120,6 +123,7 @@ do
 		then
 		    sed -i"~" '/GRUB_DEFAULT/ cGRUB_DEFAULT='"$seleccion" /etc/default/grub
 		    update-grub
+		    read -p "Pulsa INTRO para continuar..."
 		else
 		    echo "Entrada no disponible"
 		    read -p "Pulsa INTRO para continuar..."
