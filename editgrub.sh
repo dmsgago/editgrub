@@ -2,6 +2,15 @@
 # Script en GNU/LINUX.
 # Diego Martín Sánchez, 1ASIR.- IES Gonzalo Nazareno
 
+# Enunciado.
+# Realiza un script que facilite al usuario cambiar la configuración por
+# defecto del Grub. Este script deberá contar con un menú principal, que
+# permita al usuario elegir entre las distintas operaciones que ofrece el
+# script. Esas opciones son: cambiar la imagen de fondo, cambiar el tiempo
+# de espera y modificar la entrada seleccionada por defecto en el menú del
+# Grub. Además, el usuario contará en el menú principal con una opción que
+# le permita salir del script.
+
 #Bucle que se ejecuta hasta que el usuario decide salir
 salir="0"
 while [ $salir -eq "0" ]
